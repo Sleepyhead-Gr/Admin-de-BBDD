@@ -1,0 +1,259 @@
+CREATE TABLE Sucursales (
+    id_sucursal INT PRIMARY KEY,
+    nombre_sucursal VARCHAR(100) NOT NULL,
+    encargado VARCHAR(100) NOT NULL,
+    direccion VARCHAR(150) NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
+    ciudad VARCHAR(50) NOT NULL,
+    estado VARCHAR(50) NOT NULL
+);
+
+INSERT INTO sucursales VALUES
+(1, 'Akira’s Boutique: Las Mercedes', 'Sonia Alejandra Fernández Moreno',
+ 'Calle Roble #507 Fracc. Las Mercedes', '444 783 1225',
+ 'San Luis Potosí', 'San Luis Potosí'),
+
+(2, 'Akira’s Boutique: Obraje', 'Fernando Calderón Ayala',
+ 'Calle Dr. Jesús Díaz de León #438 Col. Obraje', '449 378 0921',
+ 'Aguascalientes', 'Aguascalientes'),
+
+(3, 'Akira’s Boutique: Galerías Mazatlán', 'Daniela Fernanda Díaz Ordaz',
+ 'Av. de la Marina #6204, Marina, Local 35', '669 293 2059',
+ 'Mazatlán', 'Sinaloa'),
+
+(4, 'Akira’s Boutique: Zapopan', 'Mario Alberto Jiménez Salcido',
+ 'Av. Manuel J. Clouthier 525 Col. Benito Juárez', '333 784 1230',
+ 'Zapopan', 'Jalisco'),
+
+(5, 'Akira’s Boutique: Melchor', 'Yesenia Guadalupe Campos Rojo',
+ 'Av. Melchor Ocampo #2528 Zona Centro', '614 390 6721',
+ 'Chihuahua', 'Chihuahua'),
+
+(6, 'Akira’s Boutique: Constitución', 'Tamara Alejandra Bernal Ramos',
+ 'Calle Constitución #106 Zona Centro', '618 196 2954',
+ 'Durango', 'Durango'),
+
+(7, 'Akira’s Boutique: Centro', 'Samuel Enrique Barrios Enciso',
+ 'Av. Hidalgo #338 Centro', '492 930 1250',
+ 'Zacatecas', 'Zacatecas');
+
+ALTER TABLE sucursales
+ADD id_encargado INT;
+
+ALTER TABLE sucursales
+ADD CONSTRAINT fk_encargado
+FOREIGN KEY (id_encargado)
+REFERENCES empleados(id_empleado);
+
+
+
+CREATE TABLE empleados (
+    id_empleado INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    direccion VARCHAR(150) NOT NULL,
+    telefono VARCHAR(20) NOT NULL,
+    edad INT NOT NULL,
+    correo VARCHAR(100) UNIQUE NOT NULL,
+    contrasena VARCHAR(255) NOT NULL,
+    id_sucursal INT NOT NULL,
+    FOREIGN KEY (id_sucursal) REFERENCES sucursales(id_sucursal)
+);
+
+ALTER TABLE empleados
+ADD puesto VARCHAR(30) NOT NULL,
+ADD encargado_sucursal VARCHAR(100) NOT NULL;
+
+-- suc1
+INSERT INTO empleados
+(nombre, direccion, telefono, edad, correo, contrasena, id_sucursal, puesto, encargado_sucursal)
+VALUES
+('Sonia Alejandra Fernández Moreno', 'Calle Roble #507', '4447831225', 38,
+ 'sonia.fernandez@akiras.com', SHA2('EncLasMer1',256), 1, 'Encargado',
+ 'Sonia Alejandra Fernández Moreno'),
+
+('Luis Herrera Gómez', 'Av. Industrias #120', '4447001122', 29,
+ 'luis.herrera@akiras.com', SHA2('EmpLM2',256), 1, 'Empleado',
+ 'Sonia Alejandra Fernández Moreno'),
+
+('María Torres Ruiz', 'Calle Fresno #210', '4447112233', 26,
+ 'maria.torres@akiras.com', SHA2('EmpLM3',256), 1, 'Empleado',
+ 'Sonia Alejandra Fernández Moreno'),
+
+('Carlos Méndez Soto', 'Av. Universidad #88', '4447223344', 31,
+ 'carlos.mendez@akiras.com', SHA2('EmpLM4',256), 1, 'Empleado',
+ 'Sonia Alejandra Fernández Moreno'),
+
+('Andrea López Cruz', 'Calle Olivo #15', '4447334455', 24,
+ 'andrea.lopez@akiras.com', SHA2('EmpLM5',256), 1, 'Empleado',
+ 'Sonia Alejandra Fernández Moreno');
+
+--suc2
+
+INSERT INTO empleados VALUES
+(NULL,'Fernando Calderón Ayala','Calle Dr. Jesús Díaz #438','4493780921',42,
+ 'fernando.calderon@akiras.com',SHA2('EncObr1',256),2,'Encargado',
+ 'Fernando Calderón Ayala'),
+
+(NULL,'Paola Reyes Luna','Av. Convención #301','4493001111',27,
+ 'paola.reyes@akiras.com',SHA2('EmpO2',256),2,'Empleado',
+ 'Fernando Calderón Ayala'),
+
+(NULL,'Ricardo Molina Pérez','Calle Zaragoza #77','4493002222',33,
+ 'ricardo.molina@akiras.com',SHA2('EmpO3',256),2,'Empleado',
+ 'Fernando Calderón Ayala'),
+
+(NULL,'Daniela Ortiz Vázquez','Av. Héroes #99','4493003333',25,
+ 'daniela.ortiz@akiras.com',SHA2('EmpO4',256),2,'Empleado',
+ 'Fernando Calderón Ayala'),
+
+(NULL,'Jorge Salinas Ríos','Calle Morelos #140','4493004444',30,
+ 'jorge.salinas@akiras.com',SHA2('EmpO5',256),2,'Empleado',
+ 'Fernando Calderón Ayala');
+
+--suc3
+
+INSERT INTO empleados VALUES
+(NULL,'Daniela Fernanda Díaz Ordaz','Av. Marina #6204','6692932059',35,
+ 'daniela.diaz@akiras.com',SHA2('EncMaz1',256),3,'Encargado',
+ 'Daniela Fernanda Díaz Ordaz'),
+
+(NULL,'Brenda Castro León','Av. del Mar #18','6692001111',28,
+ 'brenda.castro@akiras.com',SHA2('EmpM2',256),3,'Empleado',
+ 'Daniela Fernanda Díaz Ordaz'),
+
+(NULL,'Iván Navarro Gil','Calle Tiburón #22','6692002222',32,
+ 'ivan.navarro@akiras.com',SHA2('EmpM3',256),3,'Empleado',
+ 'Daniela Fernanda Díaz Ordaz'),
+
+(NULL,'Karen Flores Peña','Av. Camarón #54','6692003333',24,
+ 'karen.flores@akiras.com',SHA2('EmpM4',256),3,'Empleado',
+ 'Daniela Fernanda Díaz Ordaz'),
+
+(NULL,'Eduardo Rojas Díaz','Calle Coral #9','6692004444',29,
+ 'eduardo.rojas@akiras.com',SHA2('EmpM5',256),3,'Empleado',
+ 'Daniela Fernanda Díaz Ordaz');
+
+--suc 4
+
+INSERT INTO empleados VALUES
+(NULL,'Mario Alberto Jiménez Salcido','Av. Clouthier 525','3337841230',45,
+ 'mario.jimenez@akiras.com',SHA2('EncZap1',256),4,'Encargado',
+ 'Mario Alberto Jiménez Salcido'),
+
+(NULL,'Valeria Núñez Soto','Av. Patria #410','3337001111',26,
+ 'valeria.nunez@akiras.com',SHA2('EmpZ2',256),4,'Empleado',
+ 'Mario Alberto Jiménez Salcido'),
+
+(NULL,'Héctor Pineda Ramos','Calle Juárez #89','3337002222',34,
+ 'hector.pineda@akiras.com',SHA2('EmpZ3',256),4,'Empleado',
+ 'Mario Alberto Jiménez Salcido'),
+
+(NULL,'Sofía Aguilar Pérez','Av. Vallarta #123','3337003333',23,
+ 'sofia.aguilar@akiras.com',SHA2('EmpZ4',256),4,'Empleado',
+ 'Mario Alberto Jiménez Salcido'),
+
+(NULL,'Alan Cruz Medina','Calle Hidalgo #12','3337004444',28,
+ 'alan.cruz@akiras.com',SHA2('EmpZ5',256),4,'Empleado',
+ 'Mario Alberto Jiménez Salcido');
+
+
+--suc 5
+
+INSERT INTO empleados VALUES
+(NULL,'Yesenia Guadalupe Campos Rojo','Av. Melchor Ocampo #2528','6143906721',39,
+ 'yesenia.campos@akiras.com',SHA2('EncMel1',256),5,'Encargado',
+ 'Yesenia Guadalupe Campos Rojo'),
+
+(NULL,'Patricia Luna Hernández','Calle 20 de Noviembre #34','6143001111',31,
+ 'patricia.luna@akiras.com',SHA2('EmpMEL2',256),5,'Empleado',
+ 'Yesenia Guadalupe Campos Rojo'),
+
+(NULL,'José Ramírez Soto','Av. Juárez #120','6143002222',35,
+ 'jose.ramirez@akiras.com',SHA2('EmpMEL3',256),5,'Empleado',
+ 'Yesenia Guadalupe Campos Rojo'),
+
+(NULL,'Claudia Vega Ortiz','Calle Aldama #55','6143003333',27,
+ 'claudia.vega@akiras.com',SHA2('EmpMEL4',256),5,'Empleado',
+ 'Yesenia Guadalupe Campos Rojo'),
+
+(NULL,'Miguel Torres Luna','Av. Tecnológico #402','6143004444',29,
+ 'miguel.torres@akiras.com',SHA2('EmpMEL5',256),5,'Empleado',
+ 'Yesenia Guadalupe Campos Rojo'),
+
+(NULL,'Fernanda Ríos Castañeda','Calle Ojinaga #18','6143005555',24,
+ 'fernanda.rios@akiras.com',SHA2('EmpMEL6',256),5,'Empleado',
+ 'Yesenia Guadalupe Campos Rojo'),
+
+(NULL,'Alberto Ponce Medina','Av. Independencia #98','6143006666',33,
+ 'alberto.ponce@akiras.com',SHA2('EmpMEL7',256),5,'Empleado',
+ 'Yesenia Guadalupe Campos Rojo'),
+
+(NULL,'Diana Castillo Romero','Calle Libertad #41','6143007777',26,
+ 'diana.castillo@akiras.com',SHA2('EmpMEL8',256),5,'Empleado',
+ 'Yesenia Guadalupe Campos Rojo');
+
+
+--suc 6
+
+INSERT INTO empleados VALUES
+(NULL,'Tamara Alejandra Bernal Ramos','Calle Constitución #106','6181962954',36,
+ 'tamara.bernal@akiras.com',SHA2('EncCon1',256),6,'Encargado',
+ 'Tamara Alejandra Bernal Ramos'),
+
+(NULL,'Rosa Martínez Silva','Calle Bravo #22','6182001111',28,
+ 'rosa.martinez@akiras.com',SHA2('EmpCON2',256),6,'Empleado',
+ 'Tamara Alejandra Bernal Ramos'),
+
+(NULL,'Luis Ortega Núñez','Av. 20 de Noviembre #90','6182002222',34,
+ 'luis.ortega@akiras.com',SHA2('EmpCON3',256),6,'Empleado',
+ 'Tamara Alejandra Bernal Ramos'),
+
+(NULL,'Karen Pacheco Ruiz','Calle Hidalgo #14','6182003333',23,
+ 'karen.pacheco@akiras.com',SHA2('EmpCON4',256),6,'Empleado',
+ 'Tamara Alejandra Bernal Ramos'),
+
+(NULL,'Óscar Medina Flores','Av. Universidad #300','6182004444',37,
+ 'oscar.medina@akiras.com',SHA2('EmpCON5',256),6,'Empleado',
+ 'Tamara Alejandra Bernal Ramos'),
+
+(NULL,'Paola Jiménez Torres','Calle Reforma #61','6182005555',26,
+ 'paola.jimenez@akiras.com',SHA2('EmpCON6',256),6,'Empleado',
+ 'Tamara Alejandra Bernal Ramos'),
+
+(NULL,'Iván Soto Carrillo','Av. Morelos #118','6182006666',31,
+ 'ivan.soto@akiras.com',SHA2('EmpCON7',256),6,'Empleado',
+ 'Tamara Alejandra Bernal Ramos');
+
+
+--suc 7
+
+INSERT INTO empleados VALUES
+(NULL,'Samuel Enrique Barrios Enciso','Av. Hidalgo #338','4929301250',41,
+ 'samuel.barrios@akiras.com',SHA2('EncZac1',256),7,'Encargado',
+ 'Samuel Enrique Barrios Enciso'),
+
+(NULL,'Mariana López Chávez','Calle Allende #19','4929001111',25,
+ 'mariana.lopez@akiras.com',SHA2('EmpZAC2',256),7,'Empleado',
+ 'Samuel Enrique Barrios Enciso'),
+
+(NULL,'Javier Cruz Méndez','Av. González Ortega #77','4929002222',33,
+ 'javier.cruz@akiras.com',SHA2('EmpZAC3',256),7,'Empleado',
+ 'Samuel Enrique Barrios Enciso'),
+
+(NULL,'Laura Fuentes Ríos','Calle Guerrero #45','4929003333',29,
+ 'laura.fuentes@akiras.com',SHA2('EmpZAC4',256),7,'Empleado',
+ 'Samuel Enrique Barrios Enciso'),
+
+(NULL,'Diego Navarro Peña','Av. Juárez #101','4929004444',27,
+ 'diego.navarro@akiras.com',SHA2('EmpZAC5',256),7,'Empleado',
+ 'Samuel Enrique Barrios Enciso'),
+
+(NULL,'Sofía Medina Torres','Calle Tacuba #8','4929005555',22,
+ 'sofia.medina@akiras.com',SHA2('EmpZAC6',256),7,'Empleado',
+ 'Samuel Enrique Barrios Enciso'),
+
+(NULL,'Raúl Vázquez Romero','Av. Torreón #66','4929006666',35,
+ 'raul.vazquez@akiras.com',SHA2('EmpZAC7',256),7,'Empleado',
+ 'Samuel Enrique Barrios Enciso');
+
+
