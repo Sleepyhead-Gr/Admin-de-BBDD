@@ -69,7 +69,7 @@ ALTER TABLE empleados
 ADD puesto VARCHAR(30) NOT NULL,
 ADD encargado_sucursal VARCHAR(100) NOT NULL;
 
-Datos de las columna de empleado por casa surcursal pero me confundi y agregue al encargado en cada registro de empleado
+-- Datos de las columna de empleado por casa surcursal pero me confundi y agregue al encargado en cada registro de empleado
 -- suc1
 INSERT INTO empleados
 (nombre, direccion, telefono, edad, correo, contrasena, id_sucursal, puesto, encargado_sucursal)
