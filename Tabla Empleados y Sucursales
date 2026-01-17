@@ -1,3 +1,5 @@
+--Tabla de Sucursales
+
 CREATE TABLE Sucursales (
     id_sucursal INT PRIMARY KEY,
     nombre_sucursal VARCHAR(100) NOT NULL,
@@ -8,6 +10,7 @@ CREATE TABLE Sucursales (
     estado VARCHAR(50) NOT NULL
 );
 
+--Datos de las sucursales
 INSERT INTO sucursales VALUES
 (1, 'Akira’s Boutique: Las Mercedes', 'Sonia Alejandra Fernández Moreno',
  'Calle Roble #507 Fracc. Las Mercedes', '444 783 1225',
@@ -37,6 +40,8 @@ INSERT INTO sucursales VALUES
  'Av. Hidalgo #338 Centro', '492 930 1250',
  'Zacatecas', 'Zacatecas');
 
+--Aqui empezo mi calvario, un id para el encargado
+
 ALTER TABLE sucursales
 ADD id_encargado INT;
 
@@ -45,7 +50,7 @@ ADD CONSTRAINT fk_encargado
 FOREIGN KEY (id_encargado)
 REFERENCES empleados(id_empleado);
 
-
+--tabla de Empleados
 
 CREATE TABLE empleados (
     id_empleado INT AUTO_INCREMENT PRIMARY KEY,
@@ -59,10 +64,12 @@ CREATE TABLE empleados (
     FOREIGN KEY (id_sucursal) REFERENCES sucursales(id_sucursal)
 );
 
+--Agregue las columnas de puesto y encargado de sucursal
 ALTER TABLE empleados
 ADD puesto VARCHAR(30) NOT NULL,
 ADD encargado_sucursal VARCHAR(100) NOT NULL;
 
+Datos de las columna de empleado por casa surcursal pero me confundi y agregue al encargado en cada registro de empleado
 -- suc1
 INSERT INTO empleados
 (nombre, direccion, telefono, edad, correo, contrasena, id_sucursal, puesto, encargado_sucursal)
