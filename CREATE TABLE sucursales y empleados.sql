@@ -36,7 +36,7 @@ INSERT INTO sucursales VALUES
 
 
 CREATE TABLE empleados (
-    id_empleado INT AUTO_INCREMENT PRIMARY KEY,
+    id_empleado INT PRIMARY KEY IDENTITY(1,1),
     nombre VARCHAR(100) NOT NULL,
     direccion VARCHAR(150) NOT NULL,
     telefono VARCHAR(20) NOT NULL,
@@ -106,6 +106,7 @@ VALUES
 ('Isabela Cortés Lara', 'Av. Juárez #80', '492 300 3333', 27, 'isabela.cortes@akiras.com', SHA2('akira123',256), 7),
 ('Marisol Peña Ríos', 'Centro #23', '492 300 4444', 29, 'marisol.pena@akiras.com', SHA2('akira123',256), 7),
 ('Fernanda Rojas Silva', 'Calle Hidalgo #99', '492 300 5555', 22, 'fernanda.rojas@akiras.com', SHA2('akira123',256), 7);
+
 
 
 
